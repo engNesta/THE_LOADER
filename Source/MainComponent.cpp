@@ -12,6 +12,10 @@ MainComponent::MainComponent()
     loadButton.setColour(juce::TextButton::textColourOffId, juce::Colour::fromRGB(18, 18, 18));
 
     loadButton.addListener(this);
+
+    infoLabel.setText("VST3 LOADER", juce::dontSendNotification);
+    infoLabel.setColour(juce::Label::textColourId, juce::Colour::fromRGB(250, 249, 246));
+    addAndMakeVisible(infoLabel);
     addAndMakeVisible(loadButton);
 
 }
@@ -42,11 +46,28 @@ void MainComponent::resized()
     // If you add any child components, this is where you should
     // update their positions.
     loadButton.setBounds(175 , 275, 240, 50);
+    infoLabel.setBounds(170, 500, 400, 50);
 }
 
 void MainComponent::buttonClicked(juce::Button *button) {
     if (button == &loadButton)
     {
         loadButton.setButtonText("LOADING...");
+        loadFile();
     }
+}
+
+void MainComponent::loadFile()
+{
+    fileChooser = std::make_unique<FileChooser>("Select a VST3 Plugin", File::getSpecialLocation(File::userDesktopDirectory), "*.vst3");
+    auto folderChooserFlags = FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles;
+    fileChooser->launchAsync(folderChooserFlags, [this](const FileChooser& chooser)
+    {
+            auto result = chooser.getResult();
+            if (result.exists())
+            {
+                auto path = result.getFullPathName();
+                infoLabel.setText(path, juce::dontSendNotification);
+            }
+    });
 }

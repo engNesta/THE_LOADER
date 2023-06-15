@@ -18,11 +18,14 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     void buttonClicked(juce::Button* button) override;
+    void loadFile();
 
 private:
     //==============================================================================
     // Your private member variables go here...
     juce::TextButton loadButton;
+    juce::Label infoLabel;
+    std::unique_ptr<FileChooser> fileChooser;
 
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
