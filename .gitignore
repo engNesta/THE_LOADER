@@ -1,0 +1,5 @@
+cmaake-build-debug/
+cmaake-build-release/
+cmake-build-debug-event-trace/
+.idea/
+.DS_Store
