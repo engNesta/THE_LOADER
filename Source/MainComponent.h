@@ -1,6 +1,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <juce_audio_processors/juce_audio_processors.h>
 
 //==============================================================================
 /*
@@ -15,6 +16,9 @@ public:
     ~MainComponent() override;
 
     //==============================================================================
+    juce::TextButton loadButton;
+    juce::Label infoLabel;
+    //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
     void buttonClicked(juce::Button* button) override;
@@ -24,8 +28,8 @@ public:
 private:
     //==============================================================================
     // Your private member variables go here...
-    juce::TextButton loadButton;
-    juce::Label infoLabel;
+
+
     std::unique_ptr<FileChooser> fileChooser;
 
 

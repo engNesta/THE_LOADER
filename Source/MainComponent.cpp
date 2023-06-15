@@ -59,8 +59,6 @@ void MainComponent::buttonClicked(juce::Button *button) {
 
 void MainComponent::loadFile()
 {
-
-
     fileChooser = std::make_unique<FileChooser>("Select a VST3 Plugin", File::getSpecialLocation(File::userDesktopDirectory), "*.vst3");
 
     auto folderChooserFlags = FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles;
@@ -79,9 +77,6 @@ void MainComponent::loadFile()
 
 void MainComponent::retrieveVST3data(juce::File &file)
 {
-    AudioPluginFormatManager formatManager;
-    formatManager.addDefaultFormats();
-
     PluginDescription vst3Description;
     vst3Description.fileOrIdentifier = file.getFullPathName();
     vst3Description.uniqueId = 0;
